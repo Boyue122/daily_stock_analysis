@@ -714,29 +714,6 @@ def main() -> int:
     except Exception as e:
         logger.exception(f"程序执行失败: {e}")
         return 1
-        import smtplib
-from email.mime.text import MIMEText
-import os
-
-
-def send_email(report):
-
-    smtp_host = os.getenv("SMTP_HOST")
-    smtp_port = int(os.getenv("SMTP_PORT"))
-    smtp_user = os.getenv("SMTP_USER")
-    smtp_pass = os.getenv("SMTP_PASS")
-    email_to = os.getenv("EMAIL_TO")
-
-    msg = MIMEText(report, "plain", "utf-8")
-    msg["Subject"] = "Daily Stock Analysis"
-    msg["From"] = smtp_user
-    msg["To"] = email_to
-
-    with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
-        server.login(smtp_user, smtp_pass)
-        server.sendmail(smtp_user, email_to, msg.as_string())
-
-    print("Email sent successfully")
 
 
 if __name__ == "__main__":
